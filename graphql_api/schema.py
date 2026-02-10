@@ -2,16 +2,19 @@ import graphene
 from .queries.user import UserQueries
 from .queries.program import ProgramQueries
 from .queries.testimonial import TestimonialQueries
+from .queries.invitation import InvitationQueries
 from .mutations.auth import AuthMutations
 from .mutations.user import UserMutations
 from .mutations.program import ProgramMutations
 from .mutations.testimonial import TestimonialMutations
+from .mutations.invitation import InvitationMutations
 
 
 class Query(
     UserQueries,
     ProgramQueries,
     TestimonialQueries,
+    InvitationQueries,
     graphene.ObjectType
 ):
     """
@@ -25,6 +28,7 @@ class Mutation(
     UserMutations,
     ProgramMutations,
     TestimonialMutations,
+    InvitationMutations,
     graphene.ObjectType
 ):
     """
