@@ -1,0 +1,25 @@
+{{ institution_name }} - Invitation to Join
+
+Hi {{ full_name }},
+
+Great news! {{ invited_by }} has invited you to join {{ institution_name }} as a {{ role }}.
+
+By accepting this invitation, you'll gain access to our platform with all the privileges and responsibilities that come with the {{ role }} role.
+
+WHAT HAPPENS NEXT?
+
+1. Click the link below to accept your invitation
+2. Set your password to secure your account
+3. Start exploring the platform immediately
+
+ACCEPT YOUR INVITATION:
+{{ acceptance_url }}
+
+IMPORTANT: This invitation will expire in {{ expiry_days }} days. Make sure to accept it before then!
+
+---
+
+This invitation was sent by {{ invited_by }} from {{ institution_name }}.
+If you did not expect this invitation, you can safely ignore this email.
+
+© 2026 {{ institution_name }}. All rights reserved.
