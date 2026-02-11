@@ -18,13 +18,18 @@ class CreateProgramMutation(graphene.Mutation):
         price = graphene.Decimal(required=True)
         level = graphene.String(required=True)
         slug = graphene.String()
+        is_new = graphene.Boolean()
+        is_hot = graphene.Boolean()
+        is_professional = graphene.Boolean()
+        auto_calculate_badges = graphene.Boolean()
 
     program = graphene.Field(ProgramType)
     success = graphene.Boolean()
     message = graphene.String()
 
     @editor_required
-    def mutate(self, info, title, description, category_id, duration, price, level, slug=None):
+    def mutate(self, info, title, description, category_id, duration, price, level, slug=None,
+               is_new=None, is_hot=None, is_professional=None, auto_calculate_badges=True):
         user = info.context.user
 
         # Validate level
@@ -61,7 +66,11 @@ class CreateProgramMutation(graphene.Mutation):
                 duration=duration,
                 price=price,
                 level=level,
-                created_by=user
+                created_by=user,
+                is_new=is_new if is_new is not None else False,
+                is_hot=is_hot if is_hot is not None else False,
+                is_professional=is_professional if is_professional is not None else False,
+                auto_calculate_badges=auto_calculate_badges
             )
 
             return CreateProgramMutation(
@@ -89,6 +98,10 @@ class UpdateProgramMutation(graphene.Mutation):
         price = graphene.Decimal()
         level = graphene.String()
         slug = graphene.String()
+        is_new = graphene.Boolean()
+        is_hot = graphene.Boolean()
+        is_professional = graphene.Boolean()
+        auto_calculate_badges = graphene.Boolean()
 
     program = graphene.Field(ProgramType)
     success = graphene.Boolean()
@@ -128,7 +141,8 @@ class UpdateProgramMutation(graphene.Mutation):
                     )
 
             # Update other fields
-            for field in ['title', 'description', 'duration', 'price', 'level', 'slug']:
+            for field in ['title', 'description', 'duration', 'price', 'level', 'slug',
+                         'is_new', 'is_hot', 'is_professional', 'auto_calculate_badges']:
                 if field in kwargs and kwargs[field] is not None:
                     setattr(program, field, kwargs[field])
 

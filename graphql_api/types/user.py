@@ -13,6 +13,7 @@ class UserType(DjangoObjectType):
             'id', 'email', 'full_name', 'role',
             'is_active', 'date_joined', 'updated_at'
         )
+        convert_choices_to_enum = False
 
     role_display = graphene.String()
 
