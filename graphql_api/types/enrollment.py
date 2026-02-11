@@ -24,6 +24,7 @@ class EnrollmentType(DjangoObjectType):
             'payment_amount',
             'payment_reference',
         )
+        convert_choices_to_enum = False
 
     status_display = graphene.String()
     payment_status_display = graphene.String()
