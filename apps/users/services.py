@@ -45,11 +45,11 @@ class InvitationService:
         if role not in valid_roles:
             raise ValueError(f"Invalid role: {role}. Must be one of {valid_roles}")
 
-        # Cancel any existing pending invitations for this email
-        UserInvitation.objects.filter(
-            email=email,
-            status=UserInvitation.STATUS_PENDING
-        ).update(status=UserInvitation.STATUS_CANCELLED)
+        # Delete any existing invitations for this email (cancelled, expired, or pending)
+        # This allows re-inviting the same email address
+        deleted_count = UserInvitation.objects.filter(email=email).delete()[0]
+        if deleted_count > 0:
+            logger.info(f"Deleted {deleted_count} old invitation(s) for {email}")
 
         # Create invitation
         invitation = UserInvitation.objects.create(

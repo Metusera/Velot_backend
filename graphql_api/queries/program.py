@@ -74,7 +74,7 @@ class ProgramQueries(graphene.ObjectType):
         user = info.context.user
 
         # Viewers and Editors can only see published programs
-        if user.role in ['viewer', 'editor']:
+        if user.role in ['learner', 'editor']:
             return Program.objects.filter(status='published').select_related('category', 'created_by')
 
         # Admins and Super Admins can see all
@@ -90,7 +90,7 @@ class ProgramQueries(graphene.ObjectType):
 
             # Viewers and Editors can only see published programs
             user = info.context.user
-            if user.role in ['viewer', 'editor'] and program.status != 'published':
+            if user.role in ['learner', 'editor'] and program.status != 'published':
                 raise GraphQLError('Program not found')
 
             return program

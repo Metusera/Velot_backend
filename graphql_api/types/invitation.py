@@ -24,6 +24,7 @@ class UserInvitationType(DjangoObjectType):
             'expires_at',
             'accepted_at',
         )
+        convert_choices_to_enum = False
 
     role_display = graphene.String()
     status_display = graphene.String()

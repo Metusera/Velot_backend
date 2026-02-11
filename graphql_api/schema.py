@@ -3,11 +3,13 @@ from .queries.user import UserQueries
 from .queries.program import ProgramQueries
 from .queries.testimonial import TestimonialQueries
 from .queries.invitation import InvitationQueries
+from .queries.enrollment import EnrollmentQueries
 from .mutations.auth import AuthMutations
 from .mutations.user import UserMutations
 from .mutations.program import ProgramMutations
 from .mutations.testimonial import TestimonialMutations
 from .mutations.invitation import InvitationMutations
+from .mutations.enrollment import EnrollmentMutations
 
 
 class Query(
@@ -15,6 +17,7 @@ class Query(
     ProgramQueries,
     TestimonialQueries,
     InvitationQueries,
+    EnrollmentQueries,
     graphene.ObjectType
 ):
     """
@@ -29,6 +32,7 @@ class Mutation(
     ProgramMutations,
     TestimonialMutations,
     InvitationMutations,
+    EnrollmentMutations,
     graphene.ObjectType
 ):
     """

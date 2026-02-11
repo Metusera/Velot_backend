@@ -21,14 +21,17 @@ class ProgramType(DjangoObjectType):
         fields = (
             'id', 'title', 'slug', 'description', 'category',
             'duration', 'price', 'level', 'thumbnail', 'status',
+            'is_new', 'is_hot', 'is_professional', 'auto_calculate_badges',
             'created_by', 'created_at', 'updated_at', 'published_at'
         )
+        convert_choices_to_enum = False
 
     level_display = graphene.String()
     status_display = graphene.String()
     event_count = graphene.Int()
     upcoming_events_count = graphene.Int()
     is_published = graphene.Boolean()
+    badges = graphene.List(graphene.String)
 
     def resolve_level_display(self, info):
         """Return human-readable level name"""
@@ -49,3 +52,7 @@ class ProgramType(DjangoObjectType):
     def resolve_is_published(self, info):
         """Return whether program is published"""
         return self.is_published
+
+    def resolve_badges(self, info):
+        """Return calculated badges for this program"""
+        return self.calculated_badges

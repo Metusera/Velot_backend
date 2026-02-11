@@ -17,14 +17,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     ROLE_ADMIN = 'admin'
     ROLE_INSTRUCTOR = 'instructor'
     ROLE_EDITOR = 'editor'
-    ROLE_VIEWER = 'viewer'
+    ROLE_LEARNER = 'learner'
 
     ROLE_CHOICES = [
         (ROLE_SUPER_ADMIN, 'Super Admin'),
         (ROLE_ADMIN, 'Admin'),
         (ROLE_INSTRUCTOR, 'Instructor'),
         (ROLE_EDITOR, 'Editor'),
-        (ROLE_VIEWER, 'Viewer'),
+        (ROLE_LEARNER, 'Learner'),
     ]
 
     email = models.EmailField(_('email address'), unique=True)
@@ -32,7 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     role = models.CharField(
         max_length=20,
         choices=ROLE_CHOICES,
-        default=ROLE_VIEWER,
+        default=ROLE_LEARNER,
         help_text=_('User role determines permissions')
     )
     is_active = models.BooleanField(default=True)
